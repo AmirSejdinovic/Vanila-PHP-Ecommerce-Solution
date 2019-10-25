@@ -15,12 +15,12 @@
   //Here I create constant for db host name
   defined("DB_HOST") ? null : define ("DB_HOST", "localhost");
   //Here I create constant for the db user
-  define("DB_USER") ? null : define("DB_USER","root");
+  defined("DB_USER") ? null : define("DB_USER","root");
   //Here I created constant for db password
-  define("DB_PASSWORD") ? null : define("DB_PASSWORD", "");
+  defined("DB_PASSWORD") ? null : define("DB_PASSWORD", "");
 
   //Here I created constant for db name
-  define("DB_NAME") ? null : define("DB_NAME", "ecom_db");
+  defined("DB_NAME") ? null : define("DB_NAME", "ecom_db");
 
 
   //Here I created the variable $connection in which I called the mysqli_connect function and i pased the before created constant with db data as the parametars. This variable $connection will store the core conection to my data base and it will be easier to call this connection
