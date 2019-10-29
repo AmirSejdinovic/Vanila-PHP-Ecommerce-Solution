@@ -56,5 +56,19 @@ echo $product;
 
 }
 }
+//Here I created the function for displying the categories in sidebar
+function get_categories(){
+     //I use query function to pass the mysqli statement and I store that result in the variable $result
+     $resutl = query("SELECT * FROM  categories");
+     //Here I test my msqli statemnt with custom function
+     confirm($resutl);
+     //Here i created while loop and insite the argument i create the $row variable and i use the custom function fetch_array to fetch data from database table
+     while($row = fetch_array($resutl)){
+      
+     echo "<a href='category.php?id={$row['cat_id']}' class='list-group-item'>{$row['cat_title']}</a>";
+     }
+    
+
+}
 
 ?>
