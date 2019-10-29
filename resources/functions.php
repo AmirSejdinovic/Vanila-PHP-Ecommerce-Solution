@@ -72,6 +72,64 @@ function get_categories(){
     
 
 }
+//This is the function for displaying the products in the category
+function category_items(){
+  //Here I use the query function and I pased the parametar as mysqli statement
+  $result = query("SELECT * FROM products WHERE product_category_id= " .escape_string($_GET['id']) . " ");
+  //Testing query
+  confirm($result);
+  //while loop
+  while($row = fetch_array($result)){
+    //heredoc
+    $product = <<<TEXTPRODUCTS
+    <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="{$row['product_image']}" alt="">
+                    <div class="caption">
+                        <h3>{$row['product_title']}</h3>
+                        <p>{$row['short_desc']}</p>
+                        <p>
+                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+TEXTPRODUCTS;
+//displaying the products
+echo $product;
+  }
+  
+}
+
+function shop_items(){
+  //Here I use the query function and I pased the parametar as mysqli statement
+  $result = query("SELECT * FROM products ");
+  //Testing query
+  confirm($result);
+  //while loop
+  while($row = fetch_array($result)){
+    //heredoc
+    $product = <<<TEXTPRODUCTS
+    <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="{$row['product_image']}" alt="">
+                    <div class="caption">
+                        <h3>{$row['product_title']}</h3>
+                        <p>{$row['short_desc']}</p>
+                        <p>
+                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+TEXTPRODUCTS;
+//displaying the products
+echo $product;
+  }
+  
+}
+
+
 /****************BACK END FUNCTIONS***********/
 
 

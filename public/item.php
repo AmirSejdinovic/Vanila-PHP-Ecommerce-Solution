@@ -27,7 +27,9 @@
 <div class="row">
 
     <div class="col-md-7">
-       <img class="img-responsive" src="http://placehold.it/700x600" alt="">
+
+       <img class="img-responsive" src="<?php echo $row['product_image']; ?>" alt="">
+
 
     </div>
 
@@ -92,7 +94,7 @@
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active" id="home">
 
-   <?php echo $row['product_description']; ?>
+   <p><?php echo $row['product_description']; ?></p>
 
     </div>
     <div role="tabpanel" class="tab-pane" id="profile">
