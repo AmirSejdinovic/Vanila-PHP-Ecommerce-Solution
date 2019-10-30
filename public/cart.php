@@ -25,6 +25,24 @@
     //redirect("index.php");
   }
 
+  //Here I created the function for remove 
+  if(isset($_GET['remove'])){
+  //If isset the get with parametar remove than do this
+    $_SESSION['product_' . $_GET['remove']]--;
+
+    if($_SESSION['product_' . $_GET['remove']] < 1){
+      redirect("cehckout.php");
+    }else{
+      redirect("checkout.php");
+    }
+  }
+//Here I created the function for delete
+  if(isset($_GET['delete'])){
+    //If get parametar have the key of delete than asigned the session 0 
+    $_SESSION['product_' . $_GET['delete']] = 0;
+    redirect("checkout.php");
+  }
+
 
 ?>
 
