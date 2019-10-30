@@ -129,6 +129,32 @@ echo $product;
   
 }
 
+//Here I created the function for login users
+function login_user(){
+  //Here I check if the user click on submit button. It user click the submit button the do this block of code
+   if(isset($_POST['submit'])){
+     //Here I store the value that are cleaned with custom fucntion which contains mysqli_esacape_string. The mysqli_escape_strign function do not alowed the mysqli injection
+     $username = escape_string($_POST['username']);
+     $password = escape_string($_POST['password']);
+
+     //Here I create the query to select all users where inputed username and password are matched with the username and password in database
+     $query  = query("SELECT * FROM users WHERE username = '{$username}' AND password = '{$password}' ");
+     //Testing query
+     confirm($query);
+     //Here I cehck if there are zero rows of the query in database 
+     if(mysqli_num_rows($query) == 0){
+       //If it not find the user with username and password in db then via custom function redirect to login page
+         redirect("login.php");
+     }else{
+       //If ti find the user with inputed username and password the redirect to admin
+       redirect("admin");
+     }
+
+
+
+   }
+
+}
 
 /****************BACK END FUNCTIONS***********/
 
