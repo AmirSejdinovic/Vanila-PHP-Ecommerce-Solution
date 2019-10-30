@@ -181,6 +181,33 @@ function login_user(){
    }
 
 }
+//Here I created the function for procesing contact form
+function send_message(){
+  //If statement that check if the user is clicked the submit button
+  if(isset($_POST['submit'])){
+    //If user is clicked the submit button than store the value of inputs in these variables
+    $to        = "amir@gmail.com";
+    $from_name = $_POST['name'];
+    $email     = $_POST['email'];
+    $subject   = $_POST['subject'];
+    $message   = $_POST['message'];
+    //This is the header of email
+    $headers = "From: {$from_name} {$email}";
+    //We stored the mail() function in the $result variable. I do that because I want to test if the mail is send or not
+    $result = mail($to, $subject, $message, $headers);
+    //If statement that check if the mail is not send 
+    if(!$result){
+      //If mail is not send do this
+      echo "ERROR";
+      set_message("Sorry we could not send your email");
+      redirect("contact.php");
+    }else{
+      //If mail is send than do this
+      echo "SENT";
+      set_message("Your message is been sent");
+    }
+  }
+}
 
 /****************BACK END FUNCTIONS***********/
 
