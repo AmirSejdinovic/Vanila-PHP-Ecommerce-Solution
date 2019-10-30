@@ -14,9 +14,10 @@
       //If product quantitiy is not equal sesion quantit thad do code below
       if($row['product_quantity'] != $_SESSION['product_' . $_GET['add']]){
         $_SESSION['product_' . $_GET['add']] +=1;
+        redirect("checkout.php");
       }else{
         //Else do this
-        set_message("We only have" . $row['product_quantity'] . " " . "Avaible");
+        set_message("<h3 class='text-center'>We only have {$row['product_title']} " . $row['product_quantity'] . " " . " Avaible</h3>");
         redirect("checkout.php");
       }
     }

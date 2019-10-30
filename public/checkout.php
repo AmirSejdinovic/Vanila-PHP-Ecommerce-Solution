@@ -1,7 +1,8 @@
 <?php require_once("../resources/config.php");
       include(TEMPLATE_FRONT . DS . "header.php");
 
-     
+       echo $_SESSION['product_1'];
+       display_message();
 ?>
 
     <!-- Page Content -->
