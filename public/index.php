@@ -22,6 +22,7 @@ include(TEMPLATE_FRONT . DS . "header.php"); ?>
                 </div>
 
                 <div class="row">
+                
               <?php get_products(); ?>
                     
 
