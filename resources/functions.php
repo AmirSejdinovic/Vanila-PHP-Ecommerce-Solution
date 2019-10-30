@@ -1,5 +1,27 @@
 <?php
 // ============ Hellper functions ======================
+//Here I create the function for set mesage via super global variable $_SESSIOn. In this function I pased variable $msg as parametar. This parametar ($msg) we will fil when we call this function
+function set_message($msg){
+  //If statement that test if the variable $msg is empty. If it is empty the to the code block below
+   if(!empty($msg)){
+     //If the $msg is empty then we created the global varialbe $_SESSION with message parametar and asigned it the value of $msg
+     $_SESSION['message'] = $msg;
+
+   }else{
+     //If ti is not empty then we set the blank $msg varaiable
+     $msg = "";
+   }
+}
+//Here I created the function for dislaying set mesage 
+function display_message(){
+  //If there are session with parametar message the to this cocde
+  if(isset($_SESSION['message'])){
+    //Display the message
+    echo $_SESSION['message'];
+    //Unset session 
+    unset($_SESSION['message']);
+  }
+}
 //Here I create the function for redirecting. This functions have argument $location the argument we will fill with in calling function as the parametar
 function redirect($location){
   header("Location: $location");
@@ -144,9 +166,13 @@ function login_user(){
      //Here I cehck if there are zero rows of the query in database 
      if(mysqli_num_rows($query) == 0){
        //If it not find the user with username and password in db then via custom function redirect to login page
+       //We set the mesage that will display if the username and password not match with db
+       set_message("Your password or username are wrong");
          redirect("login.php");
      }else{
        //If ti find the user with inputed username and password the redirect to admin
+       //Displaying mesage in admin for login user
+       set_message("Wellcome to admin {$username}");
        redirect("admin");
      }
 
