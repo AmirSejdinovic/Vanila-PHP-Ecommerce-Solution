@@ -44,7 +44,12 @@
   }
   //Here I created the function for displaying product in cart
   function cart(){
-    //Query for selecting all products
+    //Here I created the foreach loop where i use the $_SESSIOn as input and I asigned its to key $name and value $value
+    foreach($_SESSION as $name => $value){
+       //Here I ceheck if the sesion key is "product_" and I do that with php function substr and i pase the key of foreac loop and asigned the position of 0 to start and position 8 to end 
+       if(substr($name, 0, 8) == "product_" ){
+          
+         //Query for selecting all products
     $query = query("SELECT * FROM products");
     //confimr($query);
     //While loop
@@ -65,6 +70,10 @@ TEXTPRODUCTS;
       echo $product;
 
     }
+       }
+       
+    }
+    
   }
 
 
