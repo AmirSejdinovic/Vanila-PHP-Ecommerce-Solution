@@ -31,7 +31,7 @@
     $_SESSION['product_' . $_GET['remove']]--;
 
     if($_SESSION['product_' . $_GET['remove']] < 1){
-      redirect("cehckout.php");
+      redirect("checkout.php");
     }else{
       redirect("checkout.php");
     }
@@ -39,8 +39,31 @@
 //Here I created the function for delete
   if(isset($_GET['delete'])){
     //If get parametar have the key of delete than asigned the session 0 
-    $_SESSION['product_' . $_GET['delete']] = 0;
+    $_SESSION['product_' . $_GET['delete']] = '0';
     redirect("checkout.php");
+  }
+  //Here I created the function for displaying product in cart
+  function cart(){
+    //Query for selecting all products
+    $query = query("SELECT * FROM products");
+    //confimr($query);
+    //While loop
+    while($row = fetch_array($query)){
+      //Heredoc
+      $product = <<<TEXTPRODUCTS
+      <tr>
+      <td>{$row['product_title']}</td>
+      <td>$23</td>
+      <td>3</td>
+      <td>2</td>
+      <td><a href="cart.php?remove=1">Remove</a></td>
+      <td><a href="cart.php?delete=1">Delete</a></td>
+      </tr>
+TEXTPRODUCTS;
+
+      echo $product;
+
+    }
   }
 
 
