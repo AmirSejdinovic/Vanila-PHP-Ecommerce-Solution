@@ -25,6 +25,7 @@
 <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_cart">
 <input type="hidden" name="business" value="ouremail for busines account">
+<input type="hidden" name="currency_code" value="US">
     <table class="table table-striped">
         <thead>
           <tr>
