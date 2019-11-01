@@ -44,33 +44,53 @@
   }
   //Here I created the function for displaying product in cart
   function cart(){
+
+    $total = 0;
     //Here I created the foreach loop where i use the $_SESSIOn as input and I asigned its to key $name and value $value
     foreach($_SESSION as $name => $value){
-       //Here I ceheck if the sesion key is "product_" and I do that with php function substr and i pase the key of foreac loop and asigned the position of 0 to start and position 8 to end 
+      //Here I check if the  value is greather than zero
+      if($value > 0){
+        
+             //Here I ceheck if the sesion key is "product_" and I do that with php function substr and i pase the key of foreac loop and asigned the position of 0 to start and position 8 to end 
        if(substr($name, 0, 8) == "product_" ){
+
+      //Here i sotre the id of the click producti i do it with strlen function
+          $length = strlen((int)$name  -8);
+       
+//Here I store the id
+        $id = substr($name, 8, $length);
           
-         //Query for selecting all products
-    $query = query("SELECT * FROM products");
-    //confimr($query);
-    //While loop
-    while($row = fetch_array($query)){
-      //Heredoc
-      $product = <<<TEXTPRODUCTS
-      <tr>
-      <td>{$row['product_title']}</td>
-      <td>$23</td>
-      <td>3</td>
-      <td>2</td> 
-      <td><a class="btn btn-warning" href="cart.php?remove={$row['product_id']}"><span class="glyphicon glyphicon-minus"></span></a> 
-      <a class="btn btn-success" href="cart.php?add={$row['product_id']}"><span class="glyphicon glyphicon-plus"> </span> 
-      <a class="btn btn-danger" href="cart.php?delete={$row['product_id']}"><span class="glyphicon glyphicon-remove"> </span></a></td>
-      </tr>
+        //Query for selecting all products
+   $query = query("SELECT * FROM products WHERE product_id =" .escape_string($id). "");
+   //confimr($query);
+   //While loop
+   while($row = fetch_array($query)){
+     $sub = $row['product_price'] * $value;
+     //Heredoc
+     $product = <<<TEXTPRODUCTS
+     <tr>
+     <td>{$row['product_title']}</td>
+     <td>&#36;{$row['product_price']}</td>
+     <td>{$value}</td>
+     <td>&#36;{$sub}</td> 
+     <td><a class="btn btn-warning" href="cart.php?remove={$row['product_id']}"><span class="glyphicon glyphicon-minus"></span></a> 
+     <a class="btn btn-success" href="cart.php?add={$row['product_id']}"><span class="glyphicon glyphicon-plus"> </span> 
+     <a class="btn btn-danger" href="cart.php?delete={$row['product_id']}"><span class="glyphicon glyphicon-remove"> </span></a></td>
+     </tr>
 TEXTPRODUCTS;
 
-      echo $product;
+     echo $product;
 
-    }
-       }
+     
+
+   }
+   //Here I store the total in the session because I want to have it on my disposal all over the page
+   $_SESSION['item_total'] = $total += $sub;
+      }
+
+
+      }
+  
        
     }
     

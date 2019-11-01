@@ -8,6 +8,7 @@
 
        if(isset($_SESSION['product_1'])){
            echo $_SESSION['product_1'];
+           echo $_SESSION['item_total'];
        }
 ?>
 
@@ -60,7 +61,11 @@
 
 <tr class="order-total">
 <th>Order Total</th>
-<td><strong><span class="amount">$3444</span></strong> </td>
+<td><strong><span class="amount">&#36;
+<?php 
+//Here I pase the total amount from functio in cart.php
+echo isset($_SESSION['item_total']) ? $_SESSION['item_total'] : $_SESSION['item_total'] = "";  ?>
+</span></strong> </td>
 </tr>
 
 
