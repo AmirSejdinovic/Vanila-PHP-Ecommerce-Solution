@@ -52,6 +52,10 @@
 
     $total = 0;
     $item_quantity = 0;
+    $item_name = 1;
+    $item_number = 1;
+    $amount = 1;
+    $quantity = 1;
     //Here I created the foreach loop where i use the $_SESSIOn as input and I asigned its to key $name and value $value
     foreach($_SESSION as $name => $value){
       //Here I check if the  value is greather than zero
@@ -84,11 +88,18 @@
      <a class="btn btn-success" href="cart.php?add={$row['product_id']}"><span class="glyphicon glyphicon-plus"> </span> 
      <a class="btn btn-danger" href="cart.php?delete={$row['product_id']}"><span class="glyphicon glyphicon-remove"> </span></a></td>
      </tr>
+     <input type="hidden" name="item_name_{$item_name}" value="hat">
+     <input type="hidden" name="item_number_{$item_number}" value="123">
+     <input type="hidden" name="amount_{$amount}" value="15.00">
+     <input type="hidden" name="quantity_{$quantity}" value="15.00">
 TEXTPRODUCTS;
 
      echo $product;
-
-     
+      
+     $item_name++;
+     $item_number++;
+     $amount++;
+     $quantity++;
 
    }
    //Here I store the total in the session because I want to have it on my disposal all over the page
