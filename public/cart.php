@@ -31,6 +31,8 @@
     $_SESSION['product_' . $_GET['remove']]--;
 
     if($_SESSION['product_' . $_GET['remove']] < 1){
+      unset($_SESSION['item_total']);
+      unset($_SESSION['item_quantity']);
       redirect("checkout.php");
     }else{
       redirect("checkout.php");
@@ -40,12 +42,16 @@
   if(isset($_GET['delete'])){
     //If get parametar have the key of delete than asigned the session 0 
     $_SESSION['product_' . $_GET['delete']] = '0';
+    unset($_SESSION['item_total']);
+    unset($_SESSION['item_quantity']);
     redirect("checkout.php");
+
   }
   //Here I created the function for displaying product in cart
   function cart(){
 
     $total = 0;
+    $item_quantity = 0;
     //Here I created the foreach loop where i use the $_SESSIOn as input and I asigned its to key $name and value $value
     foreach($_SESSION as $name => $value){
       //Here I check if the  value is greather than zero
@@ -66,6 +72,7 @@
    //While loop
    while($row = fetch_array($query)){
      $sub = $row['product_price'] * $value;
+     $item_quantity += $value;
      //Heredoc
      $product = <<<TEXTPRODUCTS
      <tr>
@@ -86,6 +93,8 @@ TEXTPRODUCTS;
    }
    //Here I store the total in the session because I want to have it on my disposal all over the page
    $_SESSION['item_total'] = $total += $sub;
+   //Here I store the quatntity of items in the cart
+   $_SESSION['item_quantity'] = $item_quantity;
       }
 
 
