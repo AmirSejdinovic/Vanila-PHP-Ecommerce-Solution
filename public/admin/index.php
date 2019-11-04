@@ -31,6 +31,10 @@ include(TEMPLATE_BACK . DS . "header.php");
                  }
 
 
+                if(isset($_GET['orders'])){
+                    include(TEMPLATE_BACK . DS . "orders.php");
+                }
+
 
                  
                 
