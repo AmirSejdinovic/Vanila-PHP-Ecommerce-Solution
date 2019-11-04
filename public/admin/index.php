@@ -24,7 +24,18 @@ include(TEMPLATE_BACK . DS . "header.php");
                 <!-- /.row -->
 
                  <!-- FIRST ROW WITH PANELS -->
-            <?php include(TEMPLATE_BACK . DS . "admin_content.php"); ?>
+                <?php
+                //Here I created if statement to check if the requested url is equal to url I defined. If the request url is same as defined than show the admin content
+                 if($_SERVER['REQUEST_URI'] == '/ecomm/Vanila-PHP-Ecommerce-Solution/public/admin/' || $_SERVER['REQUEST_URI'] == "/ecomm/Vanila-PHP-Ecommerce-Solution/public/admin/index.php") {
+                    include(TEMPLATE_BACK . DS . "admin_content.php");
+                 }
+
+
+
+                 
+                
+                ?>
+             
 
             </div>
             <!-- /.container-fluid -->
