@@ -14,11 +14,11 @@
       //If product quantitiy is not equal sesion quantit thad do code below
       if($row['product_quantity'] != $_SESSION['product_' . $_GET['add']]){
         $_SESSION['product_' . $_GET['add']] +=1;
-        redirect("checkout.php");
+        redirect("../public/checkout.php");
       }else{
         //Else do this
         set_message("<h3 class='text-center'>We only have {$row['product_title']} " . $row['product_quantity'] . " " . " Avaible</h3>");
-        redirect("checkout.php");
+        redirect("../public/checkout.php");
       }
     }
     //$_SESSION['product_' . $_GET['add']] += 1;
@@ -33,9 +33,9 @@
     if($_SESSION['product_' . $_GET['remove']] < 1){
       unset($_SESSION['item_total']);
       unset($_SESSION['item_quantity']);
-      redirect("checkout.php");
+      redirect("../public/checkout.php");
     }else{
-      redirect("checkout.php");
+      redirect("../public/checkout.php");
     }
   }
 //Here I created the function for delete
@@ -44,7 +44,7 @@
     $_SESSION['product_' . $_GET['delete']] = '0';
     unset($_SESSION['item_total']);
     unset($_SESSION['item_quantity']);
-    redirect("checkout.php");
+    redirect("../public/checkout.php");
 
   }
   //Here I created the function for displaying product in cart
@@ -84,9 +84,9 @@
      <td>&#36;{$row['product_price']}</td>
      <td>{$value}</td>
      <td>&#36;{$sub}</td> 
-     <td><a class="btn btn-warning" href="cart.php?remove={$row['product_id']}"><span class="glyphicon glyphicon-minus"></span></a> 
-     <a class="btn btn-success" href="cart.php?add={$row['product_id']}"><span class="glyphicon glyphicon-plus"> </span> 
-     <a class="btn btn-danger" href="cart.php?delete={$row['product_id']}"><span class="glyphicon glyphicon-remove"> </span></a></td>
+     <td><a class="btn btn-warning" href="../resources/cart.php?remove={$row['product_id']}"><span class="glyphicon glyphicon-minus"></span></a> 
+     <a class="btn btn-success" href="../resources/cart.php?add={$row['product_id']}"><span class="glyphicon glyphicon-plus"> </span> 
+     <a class="btn btn-danger" href="../resources/cart.php?delete={$row['product_id']}"><span class="glyphicon glyphicon-remove"> </span></a></td>
      </tr>
      <input type="hidden" name="item_name_{$item_name}" value="{$row['product_title']}">
      <input type="hidden" name="item_number_{$item_number}" value="{$row['product_id']}">

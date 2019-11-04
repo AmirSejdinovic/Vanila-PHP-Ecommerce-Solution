@@ -1,6 +1,6 @@
 <?php require_once("../resources/config.php");
       //Including cart.php because without of this the function from cart.php which is included in this page will not work
-      require_once("cart.php");
+      
       include(TEMPLATE_FRONT . DS . "header.php");
 
        //echo $_SESSION['product_1'];

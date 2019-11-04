@@ -28,5 +28,6 @@
   $connection = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
   //Because the congig.php file will be included in all filse I here call the file functions.php an require it. Tihs will enable me to have all functions that are stored in functions.php in all files in whici config.php is included.
   require_once("functions.php");
+  require_once("cart.php");
 
 ?>
