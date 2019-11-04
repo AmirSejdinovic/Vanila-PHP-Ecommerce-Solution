@@ -170,9 +170,12 @@ function login_user(){
        set_message("Your password or username are wrong");
          redirect("login.php");
      }else{
+
        //If ti find the user with inputed username and password the redirect to admin
+       //Here I make the SESSION with key 'username' and asigned it the value of loged user. This is important because I will in the admin section build code that only enable the logedin users to access to admin panel
+       $_SESSION['username']  = $username;
        //Displaying mesage in admin for login user
-       set_message("Wellcome to admin {$username}");
+       //set_message("Wellcome to admin {$username}");
        redirect("admin");
      }
 

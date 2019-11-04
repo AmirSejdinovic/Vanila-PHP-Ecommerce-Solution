@@ -2,6 +2,10 @@
 <?php require_once("../../resources/config.php"); 
 include(TEMPLATE_BACK . DS . "header.php");
 
+if(!isset($_SESSION['username'] )){
+    redirect("../../public");
+}
+
 ?>
         <div id="page-wrapper">
 
