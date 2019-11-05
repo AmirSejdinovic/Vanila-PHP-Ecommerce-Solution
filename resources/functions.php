@@ -1,5 +1,10 @@
 <?php
 // ============ Hellper functions ======================
+
+function last_id(){
+  global $connection;
+  return mysqli_insert_id($connection);
+}
 //Here I create the function for set mesage via super global variable $_SESSIOn. In this function I pased variable $msg as parametar. This parametar ($msg) we will fil when we call this function
 function set_message($msg){
   //If statement that test if the variable $msg is empty. If it is empty the to the code block below

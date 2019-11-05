@@ -1,4 +1,4 @@
-<?php require_once("../resources/config.php"); ?>
+<?php require_once("config.php"); ?>
 
 <?php
 //Here i check if the link has the get parametar with key of add
@@ -126,6 +126,77 @@ TEXTPRODUCTS;
     }
 
   
+    
+  }
+
+
+  function reports(){
+
+    
+
+    if(isset($_GET['tx'])){
+      //storing the value
+     $amount = $_GET['amt'];
+     $currency = $_GET['cc'];
+     $transaction = $_GET['tx'];
+     $status = $_GET['st'];
+    //Inserting the pay pal return parametars into database
+     $send_order= query("INSERT INTO orders (order_amount, order_transaction, 	order_status, order_currency) VALUES('{$amount}', '{$transaction}', '{$status}', '{$currency}')");
+        //caling the function
+     last_id();
+     //Testing query
+     confirm($query);
+
+    $total = 0;
+    $item_quantity = 0;
+    
+    //Here I created the foreach loop where i use the $_SESSIOn as input and I asigned its to key $name and value $value
+    foreach($_SESSION as $name => $value){
+      //Here I check if the  value is greather than zero
+      if($value > 0){
+        
+             //Here I ceheck if the sesion key is "product_" and I do that with php function substr and i pase the key of foreac loop and asigned the position of 0 to start and position 8 to end 
+       if(substr($name, 0, 8) == "product_" ){
+
+      //Here i sotre the id of the click producti i do it with strlen function
+          $length = strlen((int)$name  -8);
+       
+//Here I store the id
+        $id = substr($name, 8, $length);
+          
+        //Query for selecting all products
+   $query = query("SELECT * FROM products WHERE product_id =" .escape_string($id). "");
+   //confimr($query);
+   //While loop
+   while($row = fetch_array($query)){
+     $product_price = $row['product_price'];
+     $sub = $row['product_price'] * $value;
+     $item_quantity += $value;
+     $product_price = $row['product_price'];
+
+     
+
+     $insert_report = query("INSERT INTO reports(product_id, product_price, product_quantity) VALUES ('{$id}', '{$product_price}','{$value}')");
+     confimr($insert_report);
+     
+
+   }
+   
+    $total += $sub;
+   
+   $item_quantity;
+      }
+
+
+      }
+  
+       
+    }
+    //session destroy
+  } else{
+    //if the request do not have the get with kex of tx than redirect to index.php
+    redirect("index.php");
+  }
     
   }
 

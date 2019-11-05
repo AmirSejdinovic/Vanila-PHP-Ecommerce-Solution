@@ -1,6 +1,4 @@
 <?php require_once("../resources/config.php");
-      //Including cart.php because without of this the function from cart.php which is included in this page will not work
-      require_once("cart.php");
       include(TEMPLATE_FRONT . DS . "header.php");
      //if it have the pay paly return kex than do this
      if(isset($_GET['tx'])){
@@ -13,8 +11,12 @@
       $query = query("INSERT INTO orders (order_amount, order_transaction, 	order_status, order_currency) VALUES('{$amount}', '{$transaction}', '{$status}', '{$currency}')");
       //Testing query
       confirm($query);
+      
+      reports();
+
+
       //destroying the session for reset 
-      session_destroy();
+      //session_destroy();
       
      }else{
        //if the request do not have the get with kex of tx than redirect to index.php
