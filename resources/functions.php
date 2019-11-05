@@ -256,11 +256,12 @@ function display_products_admin(){
     <tr>
     <td>{$row['product_id']}</td>
     <td>{$row['product_title']}<br>
-    <img src="{$row['product_image']}" alt="">
+    <a href="index.php?edit_product&id={$row['product_id']}"><img src="{$row['product_image']}" alt=""></a>
     </td>
     <td>Category</td>
     <td>{$row['product_price']}</td>
     <td>{$row['product_quantity']}</td>
+    <td><a href="../../resources/templates/back/delete_product.php?id={$row['product_id']}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
     </tr>
 TEXTPRODUCTS;
 //echoing products
