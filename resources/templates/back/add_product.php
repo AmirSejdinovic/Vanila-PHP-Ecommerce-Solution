@@ -1,6 +1,6 @@
 
 <div class="col-md-12">
-
+<?php add_product(); ?>
 <div class="row">
 <h1 class="page-header">
    Add Product

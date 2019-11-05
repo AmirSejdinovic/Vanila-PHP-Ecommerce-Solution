@@ -269,5 +269,20 @@ echo $products;
   }
   
 }
+/***************ADDING PRODUCTS IN ADMIN***********/
+//Here I created custom function for addin products
+function add_product(){
+  //If user cliks on the publish button than do this code below. This prevent to have an error displayed when we first time load the page with this fomr
+  if(isset($_POST['publish'])){
+    //Storing input values in variables and cleaning up the inputs with custom function escape_string which is basicaly the mysqli_real_escape_string function
+    $porduct_title = escape_string($_POST['product_title']);
+    $product_description = escape_string($_POST['product_description']);
+    $product_price = escape_string($_POST['product_price']);
+    $porduct_category = escape_string($_POST['product_category']);
+    $product_brand = escape_string($_POST['product_brand']);
+    $product_tags = escape_string($_POST['product_tags']);
+    $product_image = escape_string($_FILES['file']);
+  }
+}
 
 ?>
