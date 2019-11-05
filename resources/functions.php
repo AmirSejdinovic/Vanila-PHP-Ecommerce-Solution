@@ -218,7 +218,29 @@ function send_message(){
 }
 
 /****************BACK END FUNCTIONS***********/
+//Here I created the function for displaying the data from orders table. This function I will use in the admin section for displaying the ordres
+function display_orders(){
+  //Here I created and pased the query inside db. I pased the query with my custom function query()
+  $query = query("SELECT * FROM orders");
+  //Query testing
+  confirm($query);
+  //While loop for grabing data from data base. Here in the parametars of the function I use also the custom function named fetch_array
+  while($row = fetch_array($query)){
+     //heredoc
+    $orders = <<<TEXTPRODUCTS
+    <tr>
+    <td>{$row['order_id']}</td>
+    <td>{$row['order_amount']}</td>
+    <td>{$row['order_transaction']}</td>
+    <td>{$row['order_currency']}</td>
+    <td>{$row['order_status']}</td>
+    </tr>
+TEXTPRODUCTS;
+    //echoing
+    echo $orders;
 
+  }
+}
 
 
 ?>
