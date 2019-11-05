@@ -242,6 +242,31 @@ TEXTPRODUCTS;
 
   }
 }
-
+/**************ADMIN PRODUCTS**************/
+//Here I created the custom function for displaying all products fom database in admin panel
+function display_products_admin(){
+  //Creating query that selects all rows from products tables and sending it to the db
+  $query = query("SELECT * FROM products");
+  //Testing query
+  confirm($query);
+  //While loop with who I fetch all data from rows and display it
+  while($row = fetch_array($query)){
+    //heredoc
+    $products = <<<TEXTPRODUCTS
+    <tr>
+    <td>{$row['product_id']}</td>
+    <td>{$row['product_title']}<br>
+    <img src="{$row['product_image']}" alt="">
+    </td>
+    <td>Category</td>
+    <td>{$row['product_price']}</td>
+    <td>{$row['product_quantity']}</td>
+    </tr>
+TEXTPRODUCTS;
+//echoing products
+echo $products;
+  }
+  
+}
 
 ?>
