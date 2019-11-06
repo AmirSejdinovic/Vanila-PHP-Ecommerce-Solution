@@ -1,5 +1,7 @@
 <?php
 // ============ Hellper functions ======================
+//Seting up the name of folders with images in the $uplaods variable this is important because it will enable us to easy change it if the folder be changed
+$uploads = "uploads";
 
 function last_id(){
   global $connection;
@@ -64,11 +66,14 @@ function get_products(){
   confirm($query);
   //Here I created the while loop for grabing data from selected table, after that insite the while functio i make the $row variable and asigned it result from another hellper function fetch_array(). That hellper function is working the mysqli_fetch_array function and bring us the data from database
   while($row = fetch_array($query)){
+    $product_image = 
+    //Calling the function for displying images
+    display_image($row['product_image']);
       //Here i use heredoc sintax to easy insert lot of string. This is as the template strings in ES6 Vanila JS. Heredoc start with thre code opener and after that we can declare our token and at the end we put our token and end the php statement.
      $product = <<<TEXTPRODUCTS
      <div class="col-sm-4 col-lg-4 col-md-4">
      <div class="thumbnail">
-         <a href="item.php?id={$row['product_id']}"><img src="{$row['product_image']}" alt=""></a>
+         <a href="item.php?id={$row['product_id']}"><img src="../resources/{$product_image}" alt=""></a>
          <div class="caption">
              <h4 class="pull-right">&#36;{$row['product_price']}</h4>
              <h4><a href="item.php?id={$row['product_id']}">{$row['product_title']}</a>
@@ -243,6 +248,13 @@ TEXTPRODUCTS;
   }
 }
 /**************ADMIN PRODUCTS**************/
+//Here I created the function for path to the uploads folder. The function have the parameter wihic will pased with arguments
+function display_image($picture){
+  //Here I create variable $uploads as global because it was declared on the top and I want to use it on this scope if it is not global it can be used in the scope of this function
+  global $uploads;
+  //Here I return the path to the uploads folder and picture.
+   return $uploads . DS . $picture;
+}
 //Here I created the custom function for displaying all products fom database in admin panel
 function display_products_admin(){
   //Creating query that selects all rows from products tables and sending it to the db
@@ -253,13 +265,13 @@ function display_products_admin(){
   while($row = fetch_array($query)){
     //Calling the function below and pasing the arguments and also storing the return value in this variable
     $category = show_product_category($row['product_category_id']);
-     
+    $porduct_image = display_image($row['product_image']);
     //heredoc
     $products = <<<TEXTPRODUCTS
     <tr>
     <td>{$row['product_id']}</td>
     <td>{$row['product_title']}<br>
-    <a href="index.php?edit_product&id={$row['product_id']}"><img src="{$row['product_image']}" alt=""></a>
+    <a href="index.php?edit_product&id={$row['product_id']}"><img width='100' src="../../resources/{$porduct_image}" alt=""></a>
     </td>
     <td>{$category}</td>
     <td>{$row['product_price']}</td>
