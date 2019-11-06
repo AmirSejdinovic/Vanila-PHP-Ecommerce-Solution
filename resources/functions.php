@@ -251,6 +251,9 @@ function display_products_admin(){
   confirm($query);
   //While loop with who I fetch all data from rows and display it
   while($row = fetch_array($query)){
+    //Calling the function below and pasing the arguments and also storing the return value in this variable
+    $category = show_product_category($row['product_category_id']);
+     
     //heredoc
     $products = <<<TEXTPRODUCTS
     <tr>
@@ -258,7 +261,7 @@ function display_products_admin(){
     <td>{$row['product_title']}<br>
     <a href="index.php?edit_product&id={$row['product_id']}"><img src="{$row['product_image']}" alt=""></a>
     </td>
-    <td>Category</td>
+    <td>{$category}</td>
     <td>{$row['product_price']}</td>
     <td>{$row['product_quantity']}</td>
     <td><a href="../../resources/templates/back/delete_product.php?id={$row['product_id']}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
@@ -269,6 +272,20 @@ echo $products;
   }
   
 }
+//Here I created the function for realting database rows and on basic of category id that is pased in for of adding products we here select that categorie and display its name. This function has the parametar that is variable and this parametar will store the value from arguments which we pased when we call the funciton
+function show_product_category($product_category_id){
+  //Query for selecting only category with cat_id of arguments
+$cat_query = query("SELECT * FROM categories WHERE cat_id = '{$product_category_id}' ");
+//Testing query
+confirm($cat_query);
+//While loop for fetching data form database
+while($cat_row = fetch_array($cat_query)){
+  //I here return the value of cat_title row
+   return $cat_row['cat_title'];
+}
+}
+
+
 /***************ADDING PRODUCTS IN ADMIN***********/
 //Here I created custom function for addin products
 function add_product(){
@@ -315,5 +332,7 @@ function dropdown_category(){
     
   }
 }
+
+
 
 ?>
