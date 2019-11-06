@@ -278,10 +278,41 @@ function add_product(){
     $porduct_title = escape_string($_POST['product_title']);
     $product_description = escape_string($_POST['product_description']);
     $product_price = escape_string($_POST['product_price']);
-    $porduct_category = escape_string($_POST['product_category']);
-    $product_brand = escape_string($_POST['product_brand']);
-    $product_tags = escape_string($_POST['product_tags']);
-    $product_image = escape_string($_FILES['file']);
+   $porduct_category = escape_string($_POST['product_category']);
+    //$product_brand = escape_string($_POST['product_brand']);
+    //$product_tags = escape_string($_POST['product_tags']);
+    $produc_quantitiy = escape_string($_POST['product_quanitity']);
+    $short_desc = escape_string($_POST['short_desc']);
+    //Puling up the images and storing in variable
+    $product_image = $_FILES['file']['name'];
+    //Storing in variable the temp location of file
+    $image_temp_location = $_FILES['file']['tmp_name'];
+    //This is the native php function for moving uploaded file this function has two arguments first is the temp location and second is the path to the folder and name of picture. I use here constants for define path, constatns I defined in config php file, the DS constant is just the folder separator
+    move_uploaded_file($image_temp_location,UPLOAD_DIRECTORY . DS . $product_image );
+
+    $query = query("INSERT INTO products(	product_title, product_category_id, product_price, product_quantity, 	product_description, short_desc, 	product_image) VALUES ('{$porduct_title}', '{$porduct_category}','{$product_price}', '{$produc_quantitiy}' ,'{$product_description}', '{$short_desc}', '{$product_image}' )");
+    
+    confirm($query);
+
+    
+
+    set_message("New Product Just added");
+    redirect("index.php?products");
+
+
+  }
+}
+//Here I created the function for selecting all categories from database and display it in the dropdown list for form in adding products
+function dropdown_category(){
+  $query = query("SELECT * FROM categories");
+  confirm($query);
+
+  while($row = fetch_array($query)){
+   $cat_id =  $row['cat_id'];
+   $cat_title = $row['cat_title'];
+     
+   echo "<option value='{$cat_id}'>{$cat_title}</option>";
+    
   }
 }
 

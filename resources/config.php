@@ -12,6 +12,8 @@
   defined("TEMPLATE_FRONT") ? null : define("TEMPLATE_FRONT", __DIR__. DS ."templates/front");
   //Here I defined path for folder back where I will put all the files related to the back of this ecommerce
   defined("TEMPLATE_BACK") ? null : define ("TEMPLATE_BACK", __DIR__ .DS. "templates/back");
+  //Here I created the constatn wiht path to the uploads forder. 
+  defined("UPLOAD_DIRECTORY") ? null : define ("UPLOAD_DIRECTORY", __DIR__ . DS . "uploads");
 
   //Here I create constant for db host name
   defined("DB_HOST") ? null : define ("DB_HOST", "localhost");
