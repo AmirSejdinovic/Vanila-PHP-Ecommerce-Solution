@@ -112,16 +112,17 @@ function category_items(){
   confirm($result);
   //while loop
   while($row = fetch_array($result)){
+    $picture  = display_image($row['product_image']);
     //heredoc
     $product = <<<TEXTPRODUCTS
     <div class="col-md-3 col-sm-6 hero-feature">
                 <div class="thumbnail">
-                    <img src="{$row['product_image']}" alt="">
+                    <img src="../resources/{$picture}" alt="">
                     <div class="caption">
                         <h3>{$row['product_title']}</h3>
                         <p>{$row['short_desc']}</p>
                         <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                            <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
                         </p>
                     </div>
                 </div>
@@ -139,17 +140,19 @@ function shop_items(){
   //Testing query
   confirm($result);
   //while loop
+  
   while($row = fetch_array($result)){
+    $product_image = display_image($row['product_image']);
     //heredoc
     $product = <<<TEXTPRODUCTS
     <div class="col-md-3 col-sm-6 hero-feature">
                 <div class="thumbnail">
-                    <img src="{$row['product_image']}" alt="">
+                    <img src="../resources/{$product_image}" alt="">
                     <div class="caption">
                         <h3>{$row['product_title']}</h3>
                         <p>{$row['short_desc']}</p>
                         <p>
-                            <a href="#" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
+                            <a href="../resources/cart.php?add={$row['product_id']}" class="btn btn-primary">Buy Now!</a> <a href="item.php?id={$row['product_id']}" class="btn btn-default">More Info</a>
                         </p>
                     </div>
                 </div>
