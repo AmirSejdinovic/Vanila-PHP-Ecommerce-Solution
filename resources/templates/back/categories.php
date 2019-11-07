@@ -13,7 +13,7 @@ add_category(); ?>
 
 
 <div class="col-md-4">
-    
+    <h3 class="bg-success"><?php display_message(); ?></h3>
     <form action="" method="post">
     
         <div class="form-group">

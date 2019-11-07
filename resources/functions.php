@@ -428,13 +428,19 @@ function add_category(){
   if(isset($_POST['add_category'])){
     //Storing the value from input and cleaning it up with my custom function
     $cat_title = escape_string($_POST['cat_title']);
+
+    if(empty($cat_title) || $cat_title == " "){
+      echo "<p class='text-center bg-danger'>This canot be empty</p>";
+    }else{
      //Creating query for insertion into table of database
     $query = query("INSERT INTO categories(cat_title) VALUES('{$cat_title}') ");
     //testing query
     confirm($query);
+    set_message("Category created");
     //Redirecting to the same page this I do because I want user to se the deletation imidiatly 
     redirect("index.php?categories");
   }
+}
 }
 
 
