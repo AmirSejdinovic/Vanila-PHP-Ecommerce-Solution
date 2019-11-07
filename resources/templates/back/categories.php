@@ -1,5 +1,7 @@
 
-
+<?php 
+//Calling the function that handels the categorie submision
+add_category(); ?>
             
 
             
@@ -16,12 +18,12 @@
     
         <div class="form-group">
             <label for="category-title">Title</label>
-            <input type="text" class="form-control">
+            <input name="cat_title" type="text" class="form-control">
         </div>
 
         <div class="form-group">
             
-            <input type="submit" class="btn btn-primary" value="Add Category">
+            <input type="submit" class="btn btn-primary" name="add_category" value="Add Category">
         </div>      
 
 

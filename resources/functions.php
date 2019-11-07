@@ -398,22 +398,42 @@ function updating_product(){
 
 
 /****CATEGORIES IN ADMIN*****/
+//Here I created the function for displying the categories form database
 function show_categories_in_admin(){
+  //Here I created the query for selecting all fields from categories table
   $query = "SELECT * FROM categories";
+  //Here I send query in db via my custom function
   $send_category =  query($query);
+  //Testing query via custom function
   confirm($send_category);
-
+  //While loop for fetching data from data base
   while($row = fetch_array($send_category)){
+    //Storing the values from database in variables
     $cat_title = $row['cat_title'];
     $cat_id = $row['cat_id'];
-
+    //Heredocs
     $category =<<<TEXTPRODUCTS
     <tr>
     <td>{$cat_id}</td>
     <td>{$cat_title}</td>
+    <td><a href="../../resources/templates/back/delete_categorie.php?id={$cat_id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
     </tr>
 TEXTPRODUCTS;
 echo $category;
+  }
+}
+//Here I created the funtion for adding categories from admin panel into db
+function add_category(){
+  //Here I check if the user is clicked on the button with name of add_category. If he is click than do the code block bleow
+  if(isset($_POST['add_category'])){
+    //Storing the value from input and cleaning it up with my custom function
+    $cat_title = escape_string($_POST['cat_title']);
+     //Creating query for insertion into table of database
+    $query = query("INSERT INTO categories(cat_title) VALUES('{$cat_title}') ");
+    //testing query
+    confirm($query);
+    //Redirecting to the same page this I do because I want user to se the deletation imidiatly 
+    redirect("index.php?categories");
   }
 }
 
