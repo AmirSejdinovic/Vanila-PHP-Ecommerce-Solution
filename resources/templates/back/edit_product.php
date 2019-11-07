@@ -112,7 +112,7 @@ updating_product();
 
     <div class="form-group">
       <label for="product-title">Product Quantitiy</label>
-         <input type="number" class="form-control" name="product_quanitity">
+         <input type="number" class="form-control" name="product_quanitity" value="<?php  echo  $product_quanitity; ?>">
          </select>
     </div>
 
@@ -129,7 +129,7 @@ updating_product();
     <!-- Product Image -->
     <div class="form-group">
         <label for="product-title">Product Image</label>
-        <input type="file" name="file"><br>
+        <input type="file" name="file" ><br>
         <img width="200" src="../../resources/<?php echo $product_image; ?>" alt="">
       
     </div>
