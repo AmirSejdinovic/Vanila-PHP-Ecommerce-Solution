@@ -347,6 +347,38 @@ function dropdown_category(){
     
   }
 }
+//Here I created the function for updating products from edit products page in admin section
+function updating_product(){
+  //If statement that cheks if the button with name update was clicked. If the button is clicked than do the code in the if code block. This prevents the throwing the erros when user go first time in the page with this form
+  if(isset($_POST['update'])){
+    //Storing values in variables
+     $product_title = escape_string($_POST['product_title']);
+     $product_description = escape_string($_POST['product_description']);
+     $product_price = escape_string($_POST['product_price']);
+     $short_desc = escape_string($_POST['short_desc']);
+     $product_category = escape_string($_POST['product_category']);
+     $product_quanitity = escape_string($_POST['product_quanitity']);
+     $product_image = $_FILES['file']['name'];
+     $temp_image = $_FILES['file']['tmp_name'];
+     //Moving the uploaded picture into the images dir
+     move_uploaded_file($temp_image, UPLOAD_DIRECTORY . DS . $product_image);
+    //Query for update the values in database. This query is split in more peaces because it is eaisier to read it. I split it with same variable but i use the concatitantion propraty
+    $update_query = "UPDATE products SET ";
+    $update_query .= "product_title = '{$product_title}', ";
+    $update_query .= "product_category_id = '{$product_category}', ";
+    $update_query .= "product_price = '{$product_price}', ";
+    $update_query .= "product_quantity = '{$product_quanitity}', ";
+    $update_query .= "product_description = '{$product_description}', ";
+    $update_query .= "short_desc = '{$short_desc}', ";
+    $update_query .= "product_image= '{$product_image}' ";
+    $update_query .= "WHERE product_id=" .escape_string($_GET['id']) ." ";
+
+    confirm($update_query);
+    set_message("Product has been updated");
+    redirect("index.php?products");
+
+  }
+}
 
 
 
