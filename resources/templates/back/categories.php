@@ -44,10 +44,9 @@
 
 
     <tbody>
-        <tr>
-            <td>20</td>
-            <td>Example Title</td>
-        </tr>
+        <?php
+        //Caling the function for displaying categores. This function is located in the functions.php
+        show_categories_in_admin(); ?>
     </tbody>
 
         </table>

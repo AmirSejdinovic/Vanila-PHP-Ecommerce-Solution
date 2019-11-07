@@ -94,6 +94,7 @@ updating_product();
          <label for="product-title">Product Category</label>
           
         <select name="product_category" id="" class="form-control">
+        
             <?php 
             //Calling the function for displaying the dropdown list of categories that stored at our database
             dropdown_category(); ?>

@@ -397,5 +397,25 @@ function updating_product(){
 }
 
 
+/****CATEGORIES IN ADMIN*****/
+function show_categories_in_admin(){
+  $query = "SELECT * FROM categories";
+  $send_category =  query($query);
+  confirm($send_category);
+
+  while($row = fetch_array($send_category)){
+    $cat_title = $row['cat_title'];
+    $cat_id = $row['cat_id'];
+
+    $category =<<<TEXTPRODUCTS
+    <tr>
+    <td>{$cat_id}</td>
+    <td>{$cat_title}</td>
+    </tr>
+TEXTPRODUCTS;
+echo $category;
+  }
+}
+
 
 ?>
