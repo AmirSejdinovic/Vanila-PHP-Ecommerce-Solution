@@ -437,10 +437,33 @@ function add_category(){
     //testing query
     confirm($query);
     set_message("Category created");
-    //Redirecting to the same page this I do because I want user to se the deletation imidiatly 
-    redirect("index.php?categories");
+    
   }
 }
+}
+/**ADMIN USERS*****/
+
+function dispying_users_in_admin(){
+  $user_query =  query("SELECT * FROM users");
+  confirm($user_query);
+
+  while($row = fetch_array($user_query)){
+    $user_id = $row['user_id'];
+    $username = $row['username'];
+    $user_email = $row['email'];
+    $user_password = $row['password'];
+
+    $users =<<<TEXTPRODUCTS
+    <tr>
+    <td>{$user_id}</td>
+    <td>{$username}</td>
+    <td>{$user_email}</td>
+    <td><a href="../../resources/templates/back/delete_user.php?id={$user_id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
+    </tr>
+TEXTPRODUCTS;
+  echo $users;
+
+  }
 }
 
 
