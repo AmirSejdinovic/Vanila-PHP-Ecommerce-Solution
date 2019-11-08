@@ -57,7 +57,9 @@ if(!isset($_SESSION['username'] )){
                 if(isset($_GET['users'])){
                     include(TEMPLATE_BACK . DS . 'users.php');
                 }
-
+                if(isset($_GET['add_user'])){
+                    include(TEMPLATE_BACK . DS . 'add_user.php');
+                }
 
                  
                 

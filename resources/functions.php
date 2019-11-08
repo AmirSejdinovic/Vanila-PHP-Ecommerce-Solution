@@ -465,6 +465,22 @@ TEXTPRODUCTS;
 
   }
 }
+function add_user(){
+  if(isset($_POST['add_user'])){
+    $usename = escape_string($_POST['username']);
+    $email = escape_string($_POST['email']);
+    $password = escape_string($_POST['password']);
+    //$user_photo = $_FILES(['file']['name']);
+    //$photo_temp = $FILES(['file']['tmp_name']);
+
+    //move_uploaded_file($photo_temp, UPLOAD_DIRECTORY . DS . $user_photo);
+
+    $query = query("INSERT INTO users(username,email,password) VALUES ('{$usename}','{$email}','{$password}') ");
+    confirm($query);
+    set_message("user created");
+    redirect("index.php?users");
+  }
+}
 
 
 ?>
