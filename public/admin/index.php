@@ -60,6 +60,9 @@ if(!isset($_SESSION['username'] )){
                 if(isset($_GET['add_user'])){
                     include(TEMPLATE_BACK . DS . 'add_user.php');
                 }
+                if(isset($_GET['reports'])){
+                    include(TEMPLATE_BACK . DS . 'reports.php');
+                }
 
                  
                 

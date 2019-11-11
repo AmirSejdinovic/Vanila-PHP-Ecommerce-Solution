@@ -481,6 +481,34 @@ function add_user(){
     redirect("index.php?users");
   }
 }
+//Here I created function for dispying the all reports from database
+function get_reports_in_admin(){
+  //Query for selecting it
+  $query = query("SELECT * FROM reports");
+  //Testing query
+  confirm($query);
+   //While loop
+  while($row = fetch_array($query)){
+    //Storing values form database in variables
+    $report_id = $row['report_id'];
+    $product_id = $row['product_id'];
+    $product_price = $row['product_price'];
+    $product_quantitiy = $row['product_quantity'];
+    $product_title = $row['product_title'];
+    //heredoc
+    $reports =<<<TEXTPRODUCTS
+    <tr>
+    <td>{$report_id}</td>
+    <td>{$product_id}</td>
+    <td>{$product_price}</td>
+    <td>{$product_title}</td>
+    <td>{$product_quantitiy}</td>
+    <td><a href="../../resources/templates/back/delete_user.php?id={$report_id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
+    </tr>
+TEXTPRODUCTS;
+echo $reports;
+  }
+}
 
 
 ?>
