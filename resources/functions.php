@@ -503,7 +503,7 @@ function get_reports_in_admin(){
     <td>{$product_price}</td>
     <td>{$product_title}</td>
     <td>{$product_quantitiy}</td>
-    <td><a href="../../resources/templates/back/delete_user.php?id={$report_id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
+    <td><a href="../../resources/templates/back/delete_reports.php?id={$report_id}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
     </tr>
 TEXTPRODUCTS;
 echo $reports;
