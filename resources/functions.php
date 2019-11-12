@@ -510,5 +510,36 @@ echo $reports;
   }
 }
 
+/****SLIDERS FUNCTION********/
+function add_slides(){
+
+}
+function get_current_slide(){
+
+}
+function get_active_slide(){
+
+}
+
+function get_slieds(){
+  $query = query("SELECT * FROM slides");
+  confirm($query);
+
+  while($row = fetch_array($query)){
+
+    $slides =<<<TEXTPRODUCTS
+    <div class="item">
+    <img class="slide-image" src="http://placehold.it/800x300?tex=HELLO" alt="">
+    </div>
+TEXTPRODUCTS;
+echo $slides;
+  }
+
+}
+
+function get_slide_thumbnails(){
+
+}
+
 
 ?>
