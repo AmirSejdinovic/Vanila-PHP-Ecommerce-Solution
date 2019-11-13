@@ -540,7 +540,7 @@ function add_slides(){
   }
 
 }
-
+//Creating function for displaying images from sliders in admin
 function get_current_slide_in_admin(){
   $query = query("SELECT * FROM slides ORDER BY slide_id DESC LIMIT 1");
   confirm($query);
@@ -602,8 +602,27 @@ echo $slides;
   }
 
 }
-
+//Creating function for displaying slides images in thumbnails
 function get_slide_thumbnails(){
+   //Query for selecting images
+  $query = query("SELECT * FROM slides ORDER BY slide_id ASC ");
+  //Testing
+  confirm($query);
+  //While loop
+  while($row = fetch_array($query)){
+    $slide_image = display_image($row['slide_image']);
+   //heredoc
+    $slide_thumb_admin =<<<TEXTPRODUCTS
+    <div class="col-xs-6 col-md-3">
+    <a href="">
+      <img class="img-responsive" src="../../resources/{$slide_image}" alt="">
+    </a>
+    </div>   
+TEXTPRODUCTS;
+
+echo $slide_thumb_admin;
+  }
+
 
 }
 

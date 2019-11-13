@@ -46,8 +46,7 @@
 
 <div class="row">
   
-
-
+<?php get_slide_thumbnails(); ?>
 
 
 </div>
