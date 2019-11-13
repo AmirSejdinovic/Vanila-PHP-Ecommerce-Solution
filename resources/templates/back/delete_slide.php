@@ -5,7 +5,8 @@
 if(isset($_GET['delete_slide_id'])){
 
   //Selecting the slide image in database and detect the that image vie slide_id
-  $going_insade_db_for_image_name = query("SELECT slide_image FROM slides WHERE slide_id = " . escape_string($_GET['delete_slide_id']) ."LIMIT 1");
+  $going_insade_db_for_image_name = query("SELECT * FROM slides WHERE slide_id = " . escape_string($_GET['delete_slide_id']) ."LIMIT 1 ");
+  
   //testing query
   confirm($going_insade_db_for_image_name);
   //Fetching the result

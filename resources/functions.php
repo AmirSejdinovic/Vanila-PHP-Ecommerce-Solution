@@ -613,10 +613,13 @@ function get_slide_thumbnails(){
     $slide_image = display_image($row['slide_image']);
    //heredoc
     $slide_thumb_admin =<<<TEXTPRODUCTS
-    <div class="col-xs-6 col-md-3">
+    <div class="col-xs-6 col-md-3 image_container">
     <a href="index.php?delete_slide_id={$row['slide_id']}">
       <img width="200" class="img-responsive slide_image" src="../../resources/{$slide_image}" alt="">
     </a>
+    <div class="caption">
+    <p>{$row['slide_title']}</p>
+    </div>
     </div>   
 TEXTPRODUCTS;
 
