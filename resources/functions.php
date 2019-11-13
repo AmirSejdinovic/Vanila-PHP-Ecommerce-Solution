@@ -511,27 +511,93 @@ echo $reports;
 }
 
 /****SLIDERS FUNCTION********/
+//Creating functions for addingslide to databse
 function add_slides(){
+ //If statement to check if the user is clicked on submit button with name 'add_slied'
+  if(isset($_POST['add_slide'])){
+    //Storing values from from input into variables
+    $slide_title = escape_string($_POST['slide_title']);
+    $slide_image = $_FILES['file']['name'];
+    $slide_image_location = $_FILES['file']['tmp_name'];
+    //If the variable $slide_title is empty or the variable $slide_image is empty than do nothing and display echo message
+    if(empty($slide_title) || empty($slide_image)){
+      echo "<p class='bg-dange'>This field canot be empty</p>";
+
+    }else{
+      //If the variables are not empty than first move the image into the upload directory. Moving the image with native php function move_uploaded_file()
+      
+      move_uploaded_file($slide_image_location, UPLOAD_DIRECTORY  . DS . $slide_image);
+
+      $query = query("INSERT INTO slides(	slide_title, slide_image) VALUES('{$slide_title}','{$slide_image}') ");
+      confirm($query);
+      set_message("Slider Added");
+
+      redirect("index.php?slides");
+
+
+    }
+
+  }
 
 }
-function get_current_slide(){
 
-}
-function get_active_slide(){
-
-}
-
-function get_slieds(){
-  $query = query("SELECT * FROM slides");
+function get_current_slide_in_admin(){
+  $query = query("SELECT * FROM slides ORDER BY slide_id DESC LIMIT 1");
   confirm($query);
 
+  //While loop
   while($row = fetch_array($query)){
+    $slide_image = display_image($row['slide_image']);
+    $slide_image = display_image($row['slide_image']);
+   //heredoc
+    $active_slides_admin =<<<TEXTPRODUCTS
+    
+    <img class="img-responsive" src="../../resources/{$slide_image}" alt="">
+    
+TEXTPRODUCTS;
 
-    $slides =<<<TEXTPRODUCTS
-    <div class="item">
-    <img class="slide-image" src="http://placehold.it/800x300?tex=HELLO" alt="">
+echo $active_slides_admin;
+
+}
+}
+//Creating function for active slides
+function get_active_slide(){
+   //Query for displaying the active slides
+  $query_active_slide = query("SELECT * FROM slides ORDER BY slide_id DESC LIMIT 1");
+  //Testing
+  confirm($query_active_slide);
+  //While loop
+  while($row = fetch_array($query_active_slide)){
+    $slide_image = display_image($row['slide_image']);
+    $slide_image = display_image($row['slide_image']);
+   //heredoc
+    $active_slides =<<<TEXTPRODUCTS
+    <div class="item active">
+    <img class="slide-image" src="../resources/{$slide_image}" alt="">
     </div>
 TEXTPRODUCTS;
+
+echo $active_slides;
+
+  }
+
+}
+//Creating function for geting slides from database
+function get_slieds(){
+  //Query for selecting slides from database
+  $query = query("SELECT * FROM slides");
+  //testing query
+  confirm($query);
+  //whille loop
+  while($row = fetch_array($query)){
+    $slide_image = display_image($row['slide_image']);
+   //heredoc
+    $slides =<<<TEXTPRODUCTS
+    <div class="item">
+    <img class="slide-image" src="../resources/{$slide_image}" alt="">
+    </div>
+TEXTPRODUCTS;
+
 echo $slides;
   }
 
