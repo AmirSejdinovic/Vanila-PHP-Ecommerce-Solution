@@ -63,8 +63,12 @@ if(!isset($_SESSION['username'] )){
                 if(isset($_GET['reports'])){
                     include(TEMPLATE_BACK . DS . 'reports.php');
                 }
+                
                 if(isset($_GET['slides'])){
                     include(TEMPLATE_BACK . DS . 'slides.php');
+                }
+                if(isset($_GET['delete_slide_id'])){
+                    include(TEMPLATE_BACK . DS . 'delete_slide.php');
                 }
 
                  
