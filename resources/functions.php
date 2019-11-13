@@ -615,7 +615,7 @@ function get_slide_thumbnails(){
     $slide_thumb_admin =<<<TEXTPRODUCTS
     <div class="col-xs-6 col-md-3">
     <a href="">
-      <img class="img-responsive" src="../../resources/{$slide_image}" alt="">
+      <img width="200" class="img-responsive slide_image" src="../../resources/{$slide_image}" alt="">
     </a>
     </div>   
 TEXTPRODUCTS;
