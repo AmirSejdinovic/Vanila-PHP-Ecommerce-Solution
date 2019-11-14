@@ -64,8 +64,98 @@ function get_products(){
   $query = query("SELECT * FROM products");
   //Here I call another hellper function with this function I test my query
   confirm($query);
+
+
+  //Checking the number of rows in database wiht mysqli_num_rows() function
+  $rows = mysqli_num_rows($query);
+
+  //If the url have the get request with kex of page than do the code bleow
+  if(isset($_GET['page'])){
+    //Storing preg_replace() function value in variable. Here I user regularexpresion and with this first argumment i tell that anything that is not a nubmer replace with empty string
+    $page = preg_replace('#[^0-9]#', '' , $_GET['page']);
+
+    
+  }else{
+    //If the url do not have the get request with key page than return variable page with value 1
+    $page = 1;
+  }
+  //This variable determinates the quantity of product per page
+  $perPage = 6;
+  //Here i create the last page with devide the count of rows and product per page. Than I use ceil php native function to round up the number resul
+  $lastPage = ceil($rows /  $perPage);
+ //If statement where I check if the variable page is smaller than 1 than asigned to page variable value of 1
+  if($page < 1){
+     $page = 1;
+  }else if($page > $lastPage){
+    //if the value inside $page variable is greather than value of variable of last page than asigne to lastpage variable vlue of lastpage varable this prevents scenario that user puts grather value than last page and that gets blank page
+      $page = $lastPage;
+  }
+
+//Creating empty variable
+  $middleNumbers = '';
+
+  $sub1 = $page - 1;
+  $sub2 = $page - 2;
+  $add1 = $page + 1;
+  $add2 = $page + 2;
+
+  if($page == 1){
+
+    $middleNumbers .= '<li class="page-item active"><a class="page-link">' .$page. '</a></li>';
+
+    $middleNumbers .= '<li class="page-item "><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page= '.$add1.' ">' . $add1 . '</a></li>';
+    
+  }else if($page == $lastPage){
+    $middleNumbers .= '<li class="page-item "><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page= '.$sub1.' ">' . $sub1 . '</a></li>';
+    $middleNumbers .= '<li class="page-item active"><a class="page-link">' .$page. '</a></li>';
+
+  }elseif ($page > 2 && $page < ($lastPage -1)){
+    $middleNumbers .= '<li class="page-item "><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page= '.$sub2.' ">' . $sub2 . '</a></li>';
+    
+    $middleNumbers .= '<li class="page-item "><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page= '.$sub1.' ">' . $sub1 . '</a></li>';
+
+    $middleNumbers .= '<li class="page-item active"><a class="page-link">' .$page. '</a></li>';
+
+    $middleNumbers .= '<li class="page-item "><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page= '.$add1.' ">' . $add1 . '</a></li>';
+
+    $middleNumbers .= '<li class="page-item "><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page= '.$add2.' ">' . $add2 . '</a></li>';
+
+
+  
+  }elseif($page > 1 && $page < $lastPage){
+    $middleNumbers .= '<li class="page-item "><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page= '.$sub1.' ">' . $sub1 . '</a></li>';
+    $middleNumbers .= '<li class="page-item active"><a class="page-link">' .$page. '</a></li>';
+    $middleNumbers .= '<li class="page-item "><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page= '.$add1.' ">' . $add1 . '</a></li>';
+    
+  }
+
+  $limit = 'LIMIT ' . ($page - 1) * $perPage . ','.$perPage;
+
+$query2 = query("SELECT * FROM products {$limit}");
+confirm($query2);
+
+$outputPagination = "";
+
+/*if($lastPage != "1"){
+  echo "Page $page of $lastPage";
+}*/
+
+if($page != 1){
+  $prev = $page -1;
+  $outputPagination .= '<li class="page-item "><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page= '.$prev.' ">Back</a></li>';
+}
+
+$outputPagination .= $middleNumbers;
+
+if($page != $lastPage){
+  $next = $page +1;
+  $outputPagination .= '<li class="page-item "><a class="page-link" href="'.$_SERVER['PHP_SELF'].'?page= '.$next.' ">Next</a></li>';
+}
+
+
+
   //Here I created the while loop for grabing data from selected table, after that insite the while functio i make the $row variable and asigned it result from another hellper function fetch_array(). That hellper function is working the mysqli_fetch_array function and bring us the data from database
-  while($row = fetch_array($query)){
+  while($row = fetch_array($query2)){
     $product_image = 
     //Calling the function for displying images
     display_image($row['product_image']);
@@ -89,6 +179,7 @@ TEXTPRODUCTS;
 echo $product;
 
 }
+echo "<ul class='pagination'>{$outputPagination}</ul>";
 }
 //Here I created the function for displying the categories in sidebar
 function get_categories(){
